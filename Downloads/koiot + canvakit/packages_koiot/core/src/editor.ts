@@ -8,6 +8,8 @@ import { ClipboardManager } from './clipboard';
 import { CommandManager } from './commands/command-manager';
 import { CommandKeyBinding } from './host-event-manager/command_key_binding';
 import { EditorSettingsManager } from './settings/editor-settings'; // 🎯 NOVO: Editor settings
+import { KoiotCanvas } from './canvas/koiot-canvas'; // 🆕 NOVO: Canvas nativo Skia
+import type { CanvasKit, Canvas } from 'canvaskit-wasm';
 
 export interface KoiotEditorOptions {
   container: HTMLElement;
@@ -27,6 +29,10 @@ export class KoiotEditor {
   private container: HTMLElement;
   private canvas: HTMLCanvasElement;
   private renderer: IRenderer | null = null;
+  
+  // 🆕 NOVO: Canvas nativo Skia
+  private koiotCanvas: KoiotCanvas | null = null;
+  private canvasKit: CanvasKit | null = null;
   
   // Managers
   private viewportManager: ViewportManager;
@@ -165,10 +171,23 @@ export class KoiotEditor {
 
   private async initializeRenderer(config?: CanvasKitConfig): Promise<void> {
     try {
+      // 🆕 NOVO: Inicializar KoiotCanvas (método nativo)
+      console.log('🚀 Inicializando KoiotCanvas...');
+      this.koiotCanvas = new KoiotCanvas('koiot-canvas');
+      await this.koiotCanvas.init();
+      this.canvasKit = this.koiotCanvas.getCanvasKit();
+      console.log('✅ KoiotCanvas inicializado com sucesso!');
+      
+      // 🚨 COMPATIBILIDADE: Manter renderer antigo para elementos de UI
       this.renderer = await CanvasKitFactory.createRenderer(this.canvas, config);
+      console.log('✅ Renderer de compatibilidade inicializado');
+      
     } catch (error) {
-      console.warn('CanvasKit failed, falling back to Canvas2D:', error);
+      console.warn('❌ KoiotCanvas/CanvasKit falhou, fallback para Canvas2D:', error);
       this.renderer = new Canvas2DRenderer(this.canvas);
+      // Se KoiotCanvas falhar, usa sistema antigo
+      this.koiotCanvas = null;
+      this.canvasKit = null;
     }
 
     if (this.renderer) {
@@ -233,6 +252,72 @@ export class KoiotEditor {
     const zoom = this.zoomManager.getZoom();
     const dpr = getDevicePixelRatio();
 
+    // 🆕 NOVO: Se KoiotCanvas está disponível, usa o método nativo
+    if (this.koiotCanvas && this.canvasKit) {
+      this.renderWithSkia(viewport, zoom, dpr);
+    } else {
+      // 🚨 FALLBACK: Usa sistema antigo se KoiotCanvas não está disponível
+      this.renderWithOldSystem(viewport, zoom, dpr);
+    }
+  });
+
+  /**
+   * 🆕 NOVO: Renderização nativa com Skia
+   */
+  private renderWithSkia(viewport: any, zoom: number, dpr: number): void {
+    if (!this.koiotCanvas || !this.canvasKit) return;
+
+    const canvas = this.koiotCanvas.getCanvas();
+    
+    // 1. Limpa o canvas
+    this.koiotCanvas.clear([1, 1, 1, 1]); // Branco
+
+    // 2. Salva estado do canvas
+    canvas.save();
+
+    try {
+      // 3. Aplica transformações de viewport
+      canvas.scale(dpr, dpr);
+      canvas.scale(zoom, zoom);
+      canvas.translate(-viewport.x, -viewport.y);
+
+      // 4. Desenha todos os gráficos usando o método nativo Skia
+      const graphics = this.sceneManager.getAllGraphics();
+      for (const graphic of graphics) {
+        if (graphic.isVisible() && !graphic.isDeleted()) {
+          // ✨ USA O MÉTODO NATIVO SKIA!
+          if (graphic.drawSkia) {
+            graphic.drawSkia({ 
+              canvas, 
+              canvasKit: this.canvasKit, 
+              viewportArea: viewport 
+            });
+          } else {
+            // Fallback para gráficos que ainda não implementaram drawSkia
+            console.warn(`⚠️ Gráfico ${graphic.type} ainda não implementa drawSkia(), usando método antigo`);
+            graphic.draw({ renderer: this.renderer! });
+          }
+        }
+      }
+
+    } finally {
+      // 5. Restaura estado do canvas
+      canvas.restore();
+    }
+
+    // 6. Desenha elementos de UI (ainda usa renderer antigo)
+    this.drawUIElements(viewport, zoom, dpr);
+
+    // 7. Flush para mostrar o desenho
+    this.koiotCanvas.flush();
+  }
+
+  /**
+   * 🚨 FALLBACK: Renderização com sistema antigo
+   */
+  private renderWithOldSystem(viewport: any, zoom: number, dpr: number): void {
+    if (!this.renderer) return;
+
     // Clear canvas
     this.renderer.clearBackground('#ffffff', viewport.width, viewport.height);
 
@@ -252,6 +337,18 @@ export class KoiotEditor {
 
     this.renderer.restore();
 
+    // Draw UI elements
+    this.drawUIElements(viewport, zoom, dpr);
+
+    this.renderer.flush();
+  }
+
+  /**
+   * Desenha elementos de UI (compatível com ambos os sistemas)
+   */
+  private drawUIElements(viewport: any, zoom: number, dpr: number): void {
+    if (!this.renderer) return;
+
     // Draw UI elements in screen coordinates
     this.renderer.save();
     this.renderer.scale(dpr, dpr);
@@ -265,9 +362,7 @@ export class KoiotEditor {
     this.renderer.restore();
     
     // DOM handles draw themselves automatically!
-
-    this.renderer.flush();
-  });
+  }
 
   private drawSelectionIndicators(): void {
     if (!this.renderer) return;
@@ -474,6 +569,14 @@ export class KoiotEditor {
     this.keybindingManager.destroy();
     this.clipboard.destroy();
     this.commandKeyBinding.destroy();
+    
+    // 🆕 NOVO: Limpar KoiotCanvas
+    if (this.koiotCanvas) {
+      this.koiotCanvas.destroy();
+      this.koiotCanvas = null;
+      this.canvasKit = null;
+    }
+    
     if (this.renderer && this.renderer.destroy) {
       this.renderer.destroy();
     }

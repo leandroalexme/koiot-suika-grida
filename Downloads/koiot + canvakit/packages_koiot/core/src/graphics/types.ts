@@ -1,8 +1,16 @@
 import { IMatrixArr, IPoint, IRect } from '../utils/common';
 import { IRenderer } from '../renderer/types';
+import type { CanvasKit, Canvas } from 'canvaskit-wasm';
 
 export interface IDrawInfo {
   renderer: IRenderer;
+  viewportArea?: IRect;
+}
+
+// 🆕 Nova interface para desenho nativo com Skia
+export interface ISkiaDrawInfo {
+  canvas: Canvas;
+  canvasKit: CanvasKit;
   viewportArea?: IRect;
 }
 
@@ -59,6 +67,9 @@ export interface IGraphics {
   height?: number;
   
   draw(drawInfo: IDrawInfo): void;
+  
+  // 🆕 Método de desenho nativo com Skia (substitui o draw antigo)
+  drawSkia?(skiaDrawInfo: ISkiaDrawInfo): void;
   hitTest(point: IPoint): boolean;
   getBounds(): IRect;
   getSize(): { width: number; height: number }; // 🆕 Suika compatibility
