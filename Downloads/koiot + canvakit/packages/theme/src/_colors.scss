@@ -1,0 +1,58 @@
+/* --- Base Palette --- */
+
+/* Grayscale */
+$white: #fff;
+$gray-100: #f7f7f7; // for secondary backgrounds
+$gray-200: #f2f2f2; // for hover backgrounds, disabled elements
+$gray-300: #e0e0e0; // for borders
+$gray-400: #ccc;    // for disabled text
+$gray-500: #b3b3b3; // for placeholder text
+$gray-600: #888;    // for light/secondary text
+$gray-700: #666;    // for secondary text
+$gray-800: #333;    // for main text
+$black: #000;
+
+/* Accent: Blue */
+$blue-light: #e6f7ff;  // for selected item backgrounds
+$blue-main:  #0f8fff;  // primary action color
+$blue-dark:  #007acc;  // for hover/active states
+
+/* --- Semantic Colors --- */
+/* These tokens reference the base palette. Components should use these. */
+
+/* Primary Color (for buttons, links, highlights) */
+$color-primary: $gray-100;
+$color-primary-hover: $blue-dark;
+$color-primary-active: $blue-dark;
+
+/* Text Colors */
+$color-text-main: $gray-800;
+$color-text-secondary: $gray-700;
+$color-text-light: $gray-600;
+$color-text-placeholder: $gray-500;
+$color-text-disabled: $gray-400;
+$color-text-on-primary: $white; // Text on a primary-colored background
+
+/* Background Colors */
+$color-background: $white;
+$color-background-secondary: $gray-100;
+$color-background-hover: $gray-200;
+$color-background-selected: $gray-200;
+$color-background-disabled: $gray-200;
+
+/* Border Colors */
+$color-border: $gray-300;
+$color-border-dark: #d9d9d9;
+
+/* Icon Colors */
+$color-icon: $gray-600;
+
+/* Overlays */
+$color-overlay-light: rgba($black, 0.1);
+$color-overlay-medium: rgba($black, 0.3);
+$color-overlay-dark: rgba($black, 0.5);
+
+// Legacy colors (to be removed after refactoring)
+$color-hover: #f2f2f2;
+$color-active: #0f8fff;
+$color-selected: #e6f7ff; 

@@ -1,0 +1,51 @@
+.suika {
+  .fill-item {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 $spacing-2;
+
+    .fill-item-left {
+      display: flex;
+      align-items: center;
+
+      .suika-custom-ruler-input-box {
+        margin-right: 0;
+        &.disabled {
+          input {
+            color: $color-text-secondary;
+          }
+        }
+      }
+
+      .paint-card-alpha-input {
+        width: 45px;
+        margin-left: 0;
+        padding-left: $spacing-1;
+        &.disabled {
+          input {
+            color: $color-text-secondary;
+          }
+        }
+      }
+    }
+
+    .suika-paint-card-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .color-block {
+      margin: $spacing-2 $spacing-1;
+      width: $spacing-4;
+      height: $spacing-4;
+    }
+    .img-block {
+      margin: $spacing-2 $spacing-1 $spacing-3 $spacing-3;
+      width: $spacing-4;
+      height: $spacing-4;
+    }
+  }
+}

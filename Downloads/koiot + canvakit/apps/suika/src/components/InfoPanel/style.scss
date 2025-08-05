@@ -1,0 +1,16 @@
+.suika {
+  .info-panel {
+    /* No special layout styles needed */
+    /* FloatingPanel handles the layout */
+    height: 100%;
+    overflow: auto;
+
+    font-size: $font-size-sm;
+    user-select: none;
+
+    .empty-text {
+      color: $color-text-light;
+      padding: $spacing-4;
+    }
+  }
+}

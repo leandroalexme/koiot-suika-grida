@@ -1,0 +1,22 @@
+.suika {
+  .suika-context-menu-mask {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 20;
+  }
+
+  .suika-context-menu {
+    position: fixed;
+    border-radius: $border-radius-md;
+    padding: $spacing-2 0;
+    width: 220px; // TODO: make this a token?
+    z-index: 62;
+
+    box-shadow: $shadow-l;
+    background-color: $color-background;
+    border: 1px solid $color-border;
+  }
+}

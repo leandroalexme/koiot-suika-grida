@@ -1,0 +1,9 @@
+@import '@suika/theme/src/index.scss';
+
+  .suika-tool-bar {
+    flex-basis: 40%;
+  height: 100%;
+    display: flex;
+    align-items: center;
+  gap: $spacing-2;
+}

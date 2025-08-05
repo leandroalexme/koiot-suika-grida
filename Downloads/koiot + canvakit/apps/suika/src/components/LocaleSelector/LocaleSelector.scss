@@ -1,0 +1,38 @@
+.suika {
+  .locale-selector {
+    margin-right: $spacing-1;
+    padding: 2px;
+
+    font-size: 0;
+    cursor: pointer;
+
+    &:hover,
+    &.active {
+      background-color: $color-background-secondary;
+    }
+  }
+
+  .locale-selector-popover {
+    padding: $spacing-2 0;
+    border: $border-width-base solid $border-color;
+    border-radius: $border-radius-lg;
+    width: 120px;
+    background-color: $color-background;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05),
+      0px 4px 10px rgba(0, 0, 0, 0.1);
+
+    .locale-selector-popover-item {
+      display: block;
+      padding: $spacing-1 $spacing-4;
+      font-size: $font-size-lg;
+      color: $color-text-main;
+      text-decoration: none;
+
+      cursor: pointer;
+      &:hover {
+        color: $color-background;
+        background-color: $color-primary;
+      }
+    }
+  }
+}

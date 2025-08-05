@@ -1,0 +1,45 @@
+@import '@suika/theme';
+
+.sk-dropdown-item-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 $spacing-2;
+  height: 24px;
+  line-height: 24px;
+  font-size: $font-size-base;
+  margin: $spacing-1;
+
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    background-color: $color-primary;
+    border-radius: $border-radius-m;
+    color: $white;
+
+    .sk-dropdown-item-shortcut {
+      color: $white;
+    }
+  }
+
+  .sk-dropdown-item {
+    display: flex;
+    align-items: center;
+    font-family: $font-family-sans;
+
+    .sk-dropdown-item-icon-box {
+      width: 24px;
+      height: 24px;
+      margin-right: $spacing-1;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .sk-dropdown-item-shortcut {
+    color: $color-text-light;
+    margin-left: $spacing-4;
+  }
+}

@@ -1,0 +1,25 @@
+.suika {
+  .align-list {
+    display: flex;
+    padding: 0 $spacing-2;
+    .align-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin: 0 1px;
+      border-radius: $border-radius-base;
+      width: $size-control-height-lg;
+      height: $size-control-height-lg;
+      color: $color-text-main;
+      &:hover {
+        background-color: $color-background-secondary;
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.3;
+    }
+  }
+}

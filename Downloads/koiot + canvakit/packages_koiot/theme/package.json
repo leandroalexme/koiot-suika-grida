@@ -1,0 +1,7 @@
+{
+  "name": "@koiot/theme",
+  "version": "0.0.1",
+  "description": "Theme and styling for Koiot graphics editor",
+  "main": "src/index.scss",
+  "files": ["src"]
+}

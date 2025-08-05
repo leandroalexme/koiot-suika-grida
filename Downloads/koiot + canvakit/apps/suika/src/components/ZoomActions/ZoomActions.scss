@@ -1,0 +1,60 @@
+.suika {
+  .zoom-actions {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+
+    .value {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
+
+      height: $size-control-height-lg;
+      line-height: $size-control-height-lg;
+      font-size: $font-size-base;
+      text-align: center;
+      padding: 0 8px;
+
+      cursor: pointer;
+      border-radius: $border-radius-lg;
+      background-color: $color-background-secondary;
+    }
+
+    .popover {
+      position: absolute;
+      top: 42px;
+      right: 6px;
+
+      padding: $spacing-2 0;
+      border-radius: $border-radius-xxl;
+      width: 230px;
+      background-color: $color-background;
+      box-shadow: $shadow-l;
+      z-index: 50;
+
+      .item {
+        padding: 0 $spacing-5;
+        height: $size-control-height;
+        line-height: $size-control-height;
+        font-size: $font-size-base;
+
+        &:hover {
+          color: $color-background;
+          background-color: $color-primary;
+        }
+      }
+
+      .zoom-input-box {
+        padding: 0 $spacing-6;
+      }
+
+      .separator {
+        margin: $spacing-2 0;
+        border-top: $border-width-base solid $border-color;
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@koiot/core",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/core.es.js",
+  "module": "dist/core.es.js",
+  "types": "dist/core.d.ts",
+  "scripts": {
+    "dev": "node ../../scripts/dev.js core",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "@koiot/common": "workspace:^",
+    "@koiot/geo": "workspace:^"
+  },
+  "optionalDependencies": {
+    "canvaskit-wasm": "^0.39.1"
+  },
+  "devDependencies": {
+    "vite": "^5.0.8"
+  }
+}

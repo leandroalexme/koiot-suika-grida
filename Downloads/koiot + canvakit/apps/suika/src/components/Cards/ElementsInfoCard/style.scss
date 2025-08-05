@@ -1,0 +1,15 @@
+.suika {
+  .element-info-attrs-row {
+    display: flex;
+    margin-left: $spacing-2;
+
+    .suika-info-attrs-label {
+      display: block;
+      height: $size-control-height;
+      width: $size-control-height;
+      line-height: $size-control-height;
+      text-align: center;
+      color: $color-text-secondary;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@koiot/geo",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/geo.es.js",
+  "module": "dist/geo.es.js",
+  "types": "dist/geo.d.ts",
+  "scripts": {
+    "dev": "node ../../scripts/dev.js geo",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "@koiot/common": "workspace:^"
+  },
+  "devDependencies": {
+    "vite": "^5.0.8"
+  }
+}

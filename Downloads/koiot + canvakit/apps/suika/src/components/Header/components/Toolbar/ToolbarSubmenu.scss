@@ -1,0 +1,48 @@
+@import '@suika/theme/src/index.scss';
+
+.toolbar-submenu-trigger {
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  cursor: pointer;
+  height: $size-control-height-lg;
+  padding: 0 $spacing-2;
+  border-radius: $border-radius-lg;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $color-background-secondary;
+  }
+  
+  &.active {
+    background-color: $color-primary;
+  }
+}
+
+// Wrapper com margem invisível
+.toolbar-menu-wrapper {
+  padding: $spacing-2;
+  margin: -$spacing-2;
+  background: transparent;
+}
+
+// Estilos para o nosso contêiner interno
+.toolbar-menu-content {
+  width: 200px; // TODO: Criar um token para isso?
+  background-color: $color-background;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-xxl;
+  box-shadow: $shadow-l;
+  padding: $spacing-1 0;
+  overflow: hidden;
+}
+
+// Sobrescreve o contêiner externo do Popover para que ele fique invisível
+.sk-popover-content {
+  background: none;
+  border-radius: $border-radius-xxl; // Manter o mesmo radius para o clique
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  margin-top: 0; // Remove qualquer gap
+} 

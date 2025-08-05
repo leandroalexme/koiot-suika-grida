@@ -1,0 +1,30 @@
+@import '@suika/theme/src/index.scss';
+
+.sk-ed-menu-btn {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: var(--sk-border-radius-m);
+  cursor: pointer;
+  gap: 4px;
+
+  &:hover {
+    background-color: var(--sk-color-gray-1);
+    
+    .koiot-logo path {
+      fill: #0f8fff;
+    }
+  }
+
+  .sk-ed-menu-arrow {
+    margin-left: 4px;
+  }
+}
+
+// Garantir que o dropdown use o design system
+:global(.sk-dropdown-content) {
+  border-radius: $border-radius-xxl !important;
+  box-shadow: $shadow-l !important;
+}
+
+

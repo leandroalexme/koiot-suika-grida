@@ -1,0 +1,79 @@
+@import '@suika/theme/src/index.scss';
+
+.floating-panel {
+  position: absolute;
+  top: $spacing-4; // 16px from top
+  left: $spacing-4; // 16px from left
+  width: 240px; // Largura padrão para painéis laterais
+  background-color: $color-background;
+  border-radius: $border-radius-xxl; // 14px
+  box-shadow: $shadow-l;
+  border: 1px solid $color-border;
+  overflow: hidden; // ESSENCIAL: Garante que os filhos respeitem o border-radius
+  display: flex;
+  flex-direction: column;
+
+  .floating-panel-header {
+    padding: 0 $spacing-3; // 12px
+    border-bottom: 1px solid $color-border;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px; // Altura fixa para o header
+  }
+
+  .floating-panel-title {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .panel-close-button > button {
+    width: 24px;
+    height: 24px;
+    border-radius: $border-radius-base;
+  }
+
+  .floating-panel-content {
+    // O conteúdo interno terá seu próprio scroll se necessário
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .resize-handle {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: #fff;
+    cursor: ns-resize;
+    z-index: 10;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 2px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 1px;
+      transition: width 0.15s ease;
+    }
+
+    &:hover::before {
+      width: 70px;
+    }
+  }
+
+  &.resizing .resize-handle::before {
+    width: 70px;
+    transition: none;
+  }
+
+  &.resizing {
+    user-select: none;
+  }
+} 

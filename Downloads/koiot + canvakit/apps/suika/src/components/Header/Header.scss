@@ -1,0 +1,18 @@
+.suika {
+  .sk-header {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    border-bottom: $border-width-base solid $color-border;
+    height: $size-header-height;
+    background-color: $color-background;
+    padding: 0 $spacing-5;
+
+    .sk-right-area {
+      flex-basis: 30%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
+}

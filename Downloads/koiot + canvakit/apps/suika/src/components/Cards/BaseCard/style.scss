@@ -1,0 +1,21 @@
+.suika {
+  .info-card {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e2e2;
+    .info-card-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 0 $spacing-2 0 $spacing-4;
+      height: $size-control-height-lg;
+      line-height: $size-control-height-lg;
+
+      color: $color-text-main;
+      font-weight: bold;
+      font-size: $font-size-base;
+      font-family: $font-family-sans;
+    }
+  }
+}

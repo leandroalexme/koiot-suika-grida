@@ -1,0 +1,15 @@
+@import '@suika/theme';
+
+.sk-dropdown-content {
+  padding: $spacing-2 0;
+  border-radius: $border-radius-xxl; // Corrigido
+  min-width: 200px;
+  background-color: $color-background;
+  box-shadow: $shadow-l;
+  overflow: hidden; // Prevenção de fundo duplo
+
+  .sk-dropdown-item-separator {
+    margin: $spacing-2 0;
+    border-top: 1px solid $color-border;
+  }
+}

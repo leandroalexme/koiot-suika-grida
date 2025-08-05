@@ -1,0 +1,29 @@
+.suika {
+  .suika-context-menu-item {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 0 $spacing-4;
+    line-height: $size-control-height-lg;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    border-radius: $border-radius-md;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: $color-background-hover;
+    }
+
+    .shortcut {
+      color: $color-text-light;
+    }
+
+    &.suika-is-disable {
+      color: $color-text-disabled;
+      pointer-events: none;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}

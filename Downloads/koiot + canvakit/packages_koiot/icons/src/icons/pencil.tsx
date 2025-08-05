@@ -1,0 +1,1 @@
+// Ícone da ferramenta lápis

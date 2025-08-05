@@ -1,0 +1,31 @@
+@import '@suika/theme/src/index.scss';
+
+.panel-triggers-container {
+  position: absolute;
+  top: $spacing-3; // 12px
+  display: flex;
+  gap: $spacing-2; // 8px
+  z-index: 10; // Garantir que fiquem sobre o canvas
+
+  &.left {
+    left: $spacing-3; // 12px
+  }
+
+  &.right {
+    right: $spacing-3; // 12px
+  }
+
+  .panel-trigger-button {
+    background-color: $color-background;
+    border-radius: $border-radius-xl; // 12px
+    border: 1px solid $color-border;
+    overflow: hidden; // Garantir que o IconButton interno não vaze a borda
+    
+    // Alvo direto na classe do IconButton para garantir a sobrescrita
+    .sk-icon-btn {
+      width: $size-control-height-xl; // 40px
+      height: $size-control-height-xl; // 40px
+      border-radius: 0; // O wrapper já tem o border-radius
+    }
+  }
+} 

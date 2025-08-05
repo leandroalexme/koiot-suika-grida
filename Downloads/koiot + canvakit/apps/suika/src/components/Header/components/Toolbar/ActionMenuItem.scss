@@ -1,0 +1,57 @@
+@import '@suika/theme/src/index.scss';
+
+.action-menu-item-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 $spacing-3;
+  height: $size-control-height-lg;
+  line-height: $size-control-height-lg;
+  font-size: $font-size-base;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  margin: $spacing-1;
+  border-radius: $border-radius-md;
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-text-main;
+
+    .shortcut {
+      color: $color-text-main;
+    }
+    .suika-icon-box {
+      color: $color-text-main;
+    }
+  }
+
+  &.active {
+    background-color: $color-background-selected;
+    color: $color-text-main;
+
+    .shortcut {
+      color: $color-primary;
+    }
+    .suika-icon-box {
+      color: $color-text-main;
+    }
+  }
+
+  .action-menu-item {
+    display: flex;
+    align-items: center;
+
+    .suika-icon-box {
+      width: $size-button-icon;
+      height: $size-button-icon;
+      margin-right: $spacing-1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .shortcut {
+    color: $color-text-light;
+  }
+} 
